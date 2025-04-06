@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: iot-dashboard
+  namespace: monitoring
+data:
+  dashboard.json: |-
+    {
+      "panels": [
+        {
+          "title": "IoT Data Flow",
+          "type": "graph",
+          "targets": [{
+            "expr": "rate(iot_data_points[1m])"
+          }]
+        }
+      ]
+    }

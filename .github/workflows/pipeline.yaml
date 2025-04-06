@@ -1,0 +1,20 @@
+name: EoT Deployment Pipeline
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm test --prefix blockchain-processor
+      - run: pytest iot-simulator/tests/
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: terraform init
+      - run: terraform apply -auto-approve
+      - run: kubectl apply -f k8s/
