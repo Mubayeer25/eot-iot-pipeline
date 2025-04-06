@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: pwd
+      - run: ls -l blockchain-processor
       - run: npm test --prefix blockchain-processor
       - run: pytest iot-simulator/tests/
 
