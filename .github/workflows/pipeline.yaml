@@ -15,11 +15,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # Or the version of python your project uses
+          python-version: '3.9'
+      - name: Create Virtual Environment
+        run: python -m venv venv
+      - name: Activate Virtual Environment
+        run: source venv/bin/activate
+      - name: Check pip version
+        run: pip --version
       - name: Install pytest
         run: pip install pytest
-      - run: pytest iot-simulator/tests/
-
+      - name: Check pytest version
+        run: pytest --version
+      - name: Check PATH
+        run: echo $PATH
+      - name: Run pytest
+        run: ./venv/bin/pytest iot-simulator/tests/ # or where ever pytest is located.
   deploy:
     needs: test
     runs-on: ubuntu-latest
