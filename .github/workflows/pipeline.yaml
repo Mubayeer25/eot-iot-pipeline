@@ -8,7 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: pwd
+      - run: ls -l
       - run: ls -l blockchain-processor
+      - run: cat blockchain-processor/package.json # This will print the contents of the file, or error if it does not exist.
+      - run: npm test --prefix blockchain-processor
       - run: npm test --prefix blockchain-processor
       - run: pytest iot-simulator/tests/
 
