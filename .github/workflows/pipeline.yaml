@@ -28,8 +28,12 @@ jobs:
         run: pytest --version
       - name: Check PATH
         run: echo $PATH
-      - name: Run pytest
-        run: ./venv/bin/pytest iot-simulator/tests/ # or where ever pytest is located.
+      - name: List venv/bin
+        run: ls -l venv/bin
+      - name: Find pytest
+        run: which pytest
+      - name: Run pytest with explicit python path
+        run: ./venv/bin/python -m pytest iot-simulator/tests/
   deploy:
     needs: test
     runs-on: ubuntu-latest
